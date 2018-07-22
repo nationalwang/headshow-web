@@ -3,8 +3,8 @@
     <div class="infoBox">
       <div>
         <h1>欢迎登录Headshow文件共享平台</h1>
-        <p>关注我：CSDN博客<a target="_blank" href="https://my.csdn.net/qq_35992900?locationNum=0&fps=1">【点击进入】</a>
-          <br>QQ:1529761321 GitHub<a target="_blank" href="https://github.com/linlangleo">【点击进入】</a> </p>
+        <p>关注我：QQ:1529761321
+          <br>CSDN博客<a target="_blank" href="https://my.csdn.net/qq_35992900?locationNum=0&fps=1">【点击进入】</a> GitHub<a target="_blank" href="https://github.com/linlangleo">【点击进入】</a> </p>
         <div class="contentImg">
           <img src="../../assets/scyion.png" /></div>
       </div>
