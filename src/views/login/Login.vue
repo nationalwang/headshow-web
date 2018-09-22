@@ -32,10 +32,10 @@
         </el-form>
       </div>
     </div>
-    <p class="copyright">linlangleo-刘大仙</p></div>
+    <p class="copyright">@author-linlangleo</p></div>
 </template>
 <script>
-// import md5 from 'js-md5'
+import md5 from 'js-md5'
 import api from '@/api/api'
 export default {
   data () {
@@ -78,24 +78,25 @@ export default {
       }).catch((err) => { console.error(err) })
     },
     submitForm (formName) { // 点击登录按钮
-      this.$store.commit("showLog", false)//TODO:直接登陆
-      this.$message('登陆成功')//TODO:直接登陆
+      // this.$store.commit("showLog", false)//TODO:直接登陆
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.loading = true
-          api.configPower.postData('/index/login', {
-            code: this.rule.Code,
-            name: this.rule.user,
-            pwd: md5(this.rule.pwd) // MD5加密
+          api.configPower.postData('/log/login', {
+            code : this.rule.Code,
+            name : this.rule.user,
+            password : md5(this.rule.pwd) // MD5加密
           }).then(res => {
             this.loading = false
             if (res.data.code !== '0') {
+              this.rule.pwd = ''
               this.rule.Code = ''
               this.getImgCode()
               this.$message.error(res.data.msg)
             } else {
+              this.$message('登陆成功')//TODO:直接登陆
               document.onkeydown = ''
-              this.$store.commit('showLogin', false)
+              this.$store.commit('showLog', false)
               this.$emit('showPage')
               this.$router.push({ path: '/' })
             }
