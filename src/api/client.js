@@ -7,8 +7,8 @@ Vue.use(VueAxios, axios)
 
 class ApiClient {
   generateApiURI (uri) {
-    // return 'http://119.23.18.224:168' + uri // 服务器
-    return 'http://localhost:168' + uri // 本地
+    return 'http://119.23.18.224:168' + uri // 服务器
+    // return 'http://localhost:168' + uri // 本地
   }
 
   request (uri, data, config) {
