@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div v-if="showLog">
-      <login></login>
+      <login @showPage="signIn"></login>
     </div>
     <div v-else v-show="showContent">
       <el-container class="appContent">
@@ -30,10 +30,10 @@ import api from '@/api/api'
 import home from './views/home'
 import login from './views/login/Login'
 import Navbar from './components/layout/Navbar'
-// import TopTabs from './components/layout/TopTabs'
+ import TopTabs from './components/layout/TopTabs'
 import Sidebar from './components/layout/Sidebar'
-// import AppMain from './components/layout/AppMain'
-// import FooterBar from './components/layout/FooterBar'
+ import AppMain from './components/layout/AppMain'
+ import FooterBar from './components/layout/FooterBar'
 
 export default {
   data () {
@@ -198,27 +198,41 @@ export default {
 				"btnName": null,
 				"authFunctionVOChild": null
 			}]
-		}],
+		}
+		],
       userName: 'linlangleo',
       loading: null,
-      showContent: true,
+      showContent: false,
       leftBarwidth: 200
     }
-  },
-  created () {
-    console.log(this.navData);
   },
   components: {
     home,
     login,
     Navbar,
-    Sidebar
-    // AppMain,
-    // FooterBar,
-    // TopTabs
+		Sidebar,
+		
+    AppMain,
+    FooterBar,
+    TopTabs
   },
   name: 'App',
   methods: {
+    openFullScreen () { // 遮罩
+      this.loading = this.$loading({
+        lock: true,
+        text: 'Loading...',
+        background: 'rgba(255, 255, 255, 0.8)'
+      })
+    },
+    signIn (val, id) { // 子组件触发登录而且成功
+      this.getData()
+		},
+		getDate() {
+			alert();
+          this.$store.dispatch('tabs/getList', { type: 'EMPTY' })
+          this.userName = "res.data.data.userName"
+		},
     // go (name) {
     //   this.$router.push({ name: name })//1.使用name的方式访问
       // this.$router.push({ path: '/123' })//2.使用path的方式访问
@@ -230,13 +244,22 @@ export default {
       // })
     // }
   },
+  created () {
+    this.openFullScreen();
+    console.log(this.navData);
+      this.$router.push({ path: '/' }) // 刷新重置地址
+    setTimeout(() => {
+      this.showContent = true
+    }, 500)
+  },
   computed: {
     showLog() {
       var ifShowLog = this.$store.state.showLog;
-      // if (val) {
-      //   this.loading.close()
-      // }
+      if (ifShowLog) {
+				this.loading.close();
+      }
       return ifShowLog;
+      // return false;
     }
   }
 }
