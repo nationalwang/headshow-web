@@ -94,9 +94,9 @@ export default {
               this.getImgCode()
               this.$message.error(res.data.msg)
             } else {
-              this.$message('登陆成功')//TODO:直接登陆
+              this.$message('登陆成功')
               document.onkeydown = ''
-              this.$store.commit('showLog', false)
+              this.$store.commit('showLog', false)//登陆
               this.$emit('showPage')
               this.$router.push({ path: '/' })
             }
